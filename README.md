@@ -1,8 +1,41 @@
-# Mathematics-Modelling---MAT3334
+# Seasonal Epidemic Simulation using the SIER Model
 
-Đề tài này tập trung mô phỏng sự lan truyền của dịch bệnh có tính chất mùa vụ bằng mô hình SIER — một biến thể mở rộng của mô hình SIR cổ điển. Mô hình thêm ngăn Exposed nhằm phản ánh giai đoạn ủ bệnh, đồng thời đưa vào hệ số lây nhiễm 
-𝛽
-(
-𝑡
-)
-β(t) biến thiên theo chu kỳ thời gian để biểu diễn ảnh hưởng của mùa vụ hoặc yếu tố khí hậu. Thông qua việc giải hệ phương trình vi phân bằng phương pháp số, nhóm tiến hành phân tích sự biến động của số ca nhiễm, thời gian đạt đỉnh dịch, và tác động của biên độ mùa vụ đến động học dịch bệnh. Kết quả mô phỏng cho thấy yếu tố mùa vụ làm tăng tính chu kỳ và độ phức tạp của quá trình bùng phát dịch.
+## Overview
+This project models and simulates the spread of infectious diseases using the **SIER model** (Susceptible–Infected–Exposed–Recovered) with **seasonal transmission dynamics**.  
+By introducing a periodic infection rate that varies over time, the simulation captures real-world effects such as seasonal outbreaks or periodic waves of infection.
+
+---
+
+## Model Description
+The classical SIER model divides the population into four compartments:
+
+- **S (Susceptible)**: individuals who can be infected  
+- **E (Exposed)**: infected but not yet infectious  
+- **I (Infected)**: actively infectious individuals  
+- **R (Recovered)**: recovered and immune individuals  
+
+The model is governed by the following differential equations:
+
+\[
+\begin{aligned}
+\frac{dS}{dt} &= -\beta(t) \frac{S I}{N} \\
+\frac{dE}{dt} &= \beta(t) \frac{S I}{N} - \sigma E \\
+\frac{dI}{dt} &= \sigma E - \gamma I \\
+\frac{dR}{dt} &= \gamma I
+\end{aligned}
+\]
+
+where:
+- \( \beta(t) = \beta_0 \times (1 + \alpha \sin(2\pi t / T)) \) introduces **seasonal variation** in transmission rate  
+- \( \sigma \): rate of exposed individuals becoming infectious  
+- \( \gamma \): recovery rate  
+- \( N \): total population  
+
+---
+
+## Implementation
+The simulation is implemented in **Python** using:
+- `numpy` for numerical operations  
+- `scipy.integrate.odeint` for solving ODEs  
+- `matplotlib` for visualization  
+
